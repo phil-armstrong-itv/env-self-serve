@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Message } from '@env-self-serve/api-interfaces';
+import { ProjectList } from './projects/project-list.component';
 
 export const App = () => {
   const [m, setMessage] = useState<Message>({ message: '' });
@@ -20,6 +21,7 @@ export const App = () => {
           alt="Nx - Smart, Extensible Build Framework"
         />
       </div>
+      <div><ProjectList /></div>
       <div>{m.message}</div>
     </>
   );

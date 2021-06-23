@@ -1,30 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { Message } from '@env-self-serve/api-interfaces';
+import React from 'react';
 import { ProjectList } from './projects/project-list.component';
+import 'bulma/css/bulma.min.css';
+import { Header } from './layout';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Unknown } from './unknown.component';
+import { ProjectPage } from './projects/project.page';
 
 export const App = () => {
-  const [m, setMessage] = useState<Message>({ message: '' });
-
-  useEffect(() => {
-    fetch('/api')
-      .then((r) => r.json())
-      .then(setMessage);
-  }, []);
-
   return (
-    <>
-      <div style={{ textAlign: 'center' }}>
-        <h1>Welcome to env-self-serve!</h1>
-        <img
-          width="450"
-          src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png"
-          alt="Nx - Smart, Extensible Build Framework"
-        />
-      </div>
-      <div><ProjectList /></div>
-      <div>{m.message}</div>
-    </>
+    <Router>
+      <Header />
+      <Switch>
+        <Route path="/project/:projectId" component={ProjectPage} />
+        <Route path="/" component={ProjectList} />
+        <Route component={Unknown} />
+      </Switch>
+    </Router>
   );
 };
-
-export default App;

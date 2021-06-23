@@ -1,11 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { Message } from '@env-self-serve/api-interfaces';
+import React from 'react';
 import { useProjects } from './useProjects.hook';
+import { ProjectListItem } from './project-list-item.component';
+import { Container } from 'react-bulma-components';
 
 export const ProjectList = () => {
-    const [projects, loaded] = useProjects();
+  const [projects, loaded] = useProjects();
 
-return <ul>
-      {projects.map((project) => (<li key={project.id}>{project.name}</li>))}
-    </ul>;
+  return (
+    <>
+      {loaded && (
+        <Container>
+          {projects.map((project) => (
+            <ProjectListItem key={project.id} project={project} />
+          ))}
+        </Container>
+      )}
+      {!loaded && <div>Loading projects</div>}
+    </>
+  );
 };

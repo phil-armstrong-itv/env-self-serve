@@ -35,7 +35,28 @@ const ENVIRONMENTS: Environment[] = [
         name: 'Pre',
         description: 'Useful for investigating prod errors',
         status: 'STOPPED'
-    }
+    },
+    {
+        id: 6,
+        projectId: 2,
+        name: 'SIT',
+        description: 'Test env',
+        status: 'STARTED'
+    },
+    {
+        id: 7,
+        projectId: 3,
+        name: 'SIT',
+        description: 'Test env',
+        status: 'STARTED'
+    },
+    {
+        id: 8,
+        projectId: 3,
+        name: 'Pre',
+        description: 'Pre env',
+        status: 'STARTED'
+    },
 ]
 
 export const getAllEnvironmentsForProject = (projectId: number): Environment[] => {
@@ -50,10 +71,9 @@ export const startEnvironment = (environment: Environment): boolean => {
     if (environment.status !== 'STOPPED') {
         return false;
     }
-    
-    ENVIRONMENTS.find(env => env.id === environment.id).status = 'STARTING';
 
-    setTimeout(() => ENVIRONMENTS.find(env => env.id = environment.id).status = 'STARTED', 5000);
+    ENVIRONMENTS.find(env => env.id === environment.id).status = 'STARTED';
+
     return true;
 };
 
@@ -62,8 +82,7 @@ export const stopEnvironment = (environment: Environment): boolean => {
         return false;
     }
     
-    ENVIRONMENTS.find(env => env.id === environment.id).status = 'STOPPING';
+    ENVIRONMENTS.find(env => env.id === environment.id).status = 'STOPPED';
 
-    setTimeout(() => ENVIRONMENTS.find(env => env.id = environment.id).status = 'STOPPED', 5000);
     return true;
 };

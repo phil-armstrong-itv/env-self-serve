@@ -3,8 +3,10 @@ import { getEnvironmentById, startEnvironment } from '../services/environments.s
 
 export const startEnvironmentHandler: RequestHandler = async (req: Request, res: Response) => {
     const environmentId = Number(req.params.environmentId);
+    console.log(environmentId);
 
     const environment = getEnvironmentById(environmentId);
+    console.log(environment);
 
     if (!environment) {
         res.status(404).send('Environment could not be found.');
